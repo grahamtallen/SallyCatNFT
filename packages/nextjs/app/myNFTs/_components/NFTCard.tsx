@@ -7,9 +7,12 @@ export const NFTCard = ({ nft }: { nft: Collectible }) => {
   const [transferToAddress, setTransferToAddress] = useState("");
 
   const { writeContractAsync } = useScaffoldWriteContract({ contractName: "YourCollectible" });
+  const holoAttribute = nft.attributes?.find(value => value.trait_type === "Holo");
 
   return (
-    <div className="card card-compact bg-base-100 shadow-lg w-[300px] shadow-secondary">
+    <div
+      className={`card card-compact bg-base-100 shadow-lg w-[300px] shadow-secondary ${!!holoAttribute && "holographic-card"}`}
+    >
       <figure className="relative">
         {/* eslint-disable-next-line  */}
         <img src={nft.image} alt="NFT Image" className="h-60 min-w-full" />
